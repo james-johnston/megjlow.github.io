@@ -1,4 +1,6 @@
 new (function() {
+	var socket = null;
+	var connectionStatus = {status: 1, msg: ext.name + " not ready");
 	var ext = this;
  
  	var getUrlParameter = function getUrlParameter(sParam) {
@@ -37,16 +39,7 @@ new (function() {
 
   ext._shutdown = function() {};
   ext._getStatus = function() {
-    var retval = {status: 1, msg: ext.name + " not ready");
-    $.ajax({
-      type: "GET",
-      async: false,
-      url: "http://" + ext.name + "/ping",
-      success: function() {
-        retval = {status: 2, msg: 'Device connected'}
-      }
-    });
-    return retval;
+    return connectionStatus;
   };
 
   ext.getPwm = function(pin) {
